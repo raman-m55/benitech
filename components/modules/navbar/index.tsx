@@ -3,7 +3,7 @@ import { motion, useScroll , AnimatePresence} from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { IoSearch } from "react-icons/io5";
-import { Input } from "@nextui-org/react";
+import { Divider, Input } from "@nextui-org/react";
 import { TbLogin } from "react-icons/tb";
 import { CiShoppingCart } from "react-icons/ci";
 import { CiMenuFries } from "react-icons/ci";
@@ -199,9 +199,10 @@ const Navbar = () => {
                 ثبت نام
               </span>
             </div>
-            <div>
-              <CiShoppingCart className="text-5xl px-1  border-r-1 border-gray-400" />
-            </div>
+            <div className='border-r-2 border-gray-400 h-[30px]'></div>
+            <Button isIconOnly variant='light'>
+              <CiShoppingCart className="text-5xl px-1" />
+            </Button>
           </li>
         </ul>
       </nav>

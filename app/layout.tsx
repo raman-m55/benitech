@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
-import "../globals.css";
-import Navbar from "@/components/modules/navbar";
+import "./globals.css";
+import { Providers } from "@/components/modules/providers";
 
-const vazir = Vazirmatn({ subsets: ["latin"] });
+const Vazir = Vazirmatn({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "بنیتک",
   description: "فروشگاه آنلاین محصولات الکترونیک",
 };
-
 
 export default function RootLayout({
   children,
@@ -17,9 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <Navbar />
-      {children}
-    </>
+    <html lang="fa">
+      <body className={`${Vazir.className} bg-[#FAFAFA]`}>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
   );
 }

@@ -7,7 +7,13 @@ import { RiSecurePaymentFill } from "react-icons/ri";
 import Image from "next/image";
 import { Button, Divider } from "@nextui-org/react";
 import { BiChevronUp } from "react-icons/bi";
-import { BsHouse, BsInstagram, BsTelegram, BsTwitter } from "react-icons/bs";
+import {
+  BsHouse,
+  BsInstagram,
+  BsTelegram,
+  BsTwitter,
+  BsTwitterX,
+} from "react-icons/bs";
 import { LiaLinkedin, LiaLinkedinIn } from "react-icons/lia";
 import Link from "next/link";
 
@@ -24,7 +30,7 @@ function Footer() {
         <div className="flex justify-between items-center ">
           <div className="flex flex-col gap-4">
             <div>
-              <Link href={'/'}>
+              <Link href={"/"}>
                 <Image
                   src="/assets/main-logo.png"
                   width={200}
@@ -46,6 +52,7 @@ function Footer() {
             <Button
               onClick={scrollTop}
               variant="bordered"
+              color="primary"
               startContent={<BiChevronUp />}
             >
               بازگشت به بالا
@@ -134,33 +141,37 @@ function Footer() {
             <nav className="list-none flex flex-col gap-3 text-slate-600">
               <div className="flex gap-11 text-4xl">
                 <Button
+                  color="danger"
                   isIconOnly
                   variant="bordered"
-                  className="text-4xl text-slate-600"
+                  className="text-4xl text-red-600"
                   size="lg"
                 >
                   <BsInstagram />
                 </Button>
                 <Button
+                  color="primary"
                   isIconOnly
                   variant="bordered"
-                  className="text-4xl text-slate-600"
+                  className="text-4xl text-blue-600"
                   size="lg"
                 >
                   <BsTelegram />
                 </Button>
                 <Button
+                  color="default"
                   isIconOnly
                   variant="bordered"
-                  className="text-4xl text-slate-600"
+                  className="text-4xl text-black"
                   size="lg"
                 >
-                  <BsTwitter />
+                  <BsTwitterX />
                 </Button>
                 <Button
+                  color="primary"
                   isIconOnly
                   variant="bordered"
-                  className="text-4xl text-slate-600"
+                  className="text-4xl text-blue-600"
                   size="lg"
                 >
                   <LiaLinkedinIn />

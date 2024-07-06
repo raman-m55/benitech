@@ -201,13 +201,13 @@ const Navbar = () => {
             />
           </li>
           <li className="flex items-center gap-2 max-md:hidden">
-            <div className="flex items-center gap-2 text-black border-1 p-2 rounded-md border-gray-500 text-sm ">
+            <Button className="flex items-center gap-2 text-black  p-2  text-sm " variant="bordered">
               <TbLogin className="text-2xl" />
-              ورود
-              <span className="px-1 border-r-2 border-black">ثبت نام</span>
-            </div>
+        ورود | ثبت نام
+              
+            </Button>
             <div className="border-r-2 border-gray-400 h-[30px]"></div>
-            <Button isIconOnly variant="light">
+            <Button isIconOnly variant="bordered">
               <CiShoppingCart className="text-5xl px-1" />
             </Button>
           </li>

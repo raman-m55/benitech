@@ -177,17 +177,7 @@ function DashboardUserTemplate() {
                 </Button>
               </div>
             </div>
-            <div>
-              <Button
-                as={Link}
-                href={"/dashboard/users/create"}
-                color="primary"
-                size="lg"
-                type="button"
-              >
-                افزودن کاربر
-              </Button>
-            </div>
+          
           </div>
 
           {/** Products table */}

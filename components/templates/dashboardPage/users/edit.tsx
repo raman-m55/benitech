@@ -10,13 +10,13 @@ import {
   Spinner,
 } from "@nextui-org/react";
 import { Field, FieldProps, Form, Formik } from "formik";
-import { useParams,useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 
 function DashboardEditUserTemplate() {
   const param = useParams();
-  const router = useRouter()
+  const router = useRouter();
   const { data, isFetching, isError, refetch } = useSingleUser(
     param.id as string
   );
@@ -35,10 +35,10 @@ function DashboardEditUserTemplate() {
       {
         onSuccess(res) {
           toast.success(res.data.message);
-          router.push('/dashboard/users')
+          router.push("/dashboard/users");
         },
         onError(error, variables, context) {
-          console.log(error)
+          console.log(error);
         },
       }
     );
@@ -125,14 +125,17 @@ function DashboardEditUserTemplate() {
                     </div>
                   </div>
                 </div>
-                <Button
-                  type="submit"
-                  isLoading={isSubmitting ? true : false}
-                  disabled={isSubmitting ? true : false}
-                  color="primary"
-                >
-                  {isSubmitting ? "کمی صبر کنید" : "ویرایش"}
-                </Button>
+                <div className="flex items-center gap-4">
+                  <Button
+                    type="submit"
+                    isLoading={isSubmitting ? true : false}
+                    disabled={isSubmitting ? true : false}
+                    color="primary"
+                  >
+                    {isSubmitting ? "کمی صبر کنید" : "ویرایش"}
+                  </Button>
+                  <Button color="warning" onClick={()=>router.back()}>بازگشت</Button>
+                </div>
               </Form>
             </Formik>
           </div>

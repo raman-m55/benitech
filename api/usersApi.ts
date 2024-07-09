@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import apiCall from "./apiCall";
 
 export async function getUsers() {
-  return await apiCall.get("/users");
+  return await apiCall.get("/users/get-all");
 }
 
 export const useGetUsers = () => {
@@ -10,7 +10,7 @@ export const useGetUsers = () => {
 };
 //*********************************************************** */
 async function DeleteUser({ id }: { id: number }) {
-  return await apiCall.delete(`/users/${id}`);
+  return await apiCall.delete(`/users/delete/${id}`);
 }
 
 export const useDeleteUser = () => {
@@ -19,19 +19,20 @@ export const useDeleteUser = () => {
 //*********************************************************** */
 
 async function SingleUser(userID: any) {
-  return await apiCall.get(`/users/${userID}`);
+  return await apiCall.get(`/users/get-one/${userID}`);
 }
 export const useSingleUser = (userID: string) => {
   return useQuery({
     queryKey: ["/users/detail"],
     queryFn: () => SingleUser(userID),
+    refetchOnMount: true,
   });
 };
 //*********************************************************** */
 async function UpdateUser({ body }: any) {
-  const id = body.id;
-  delete body.id;
-  return await apiCall.patch(`/users/${id}`, body);
+  const id = body._id;
+  delete body._id;
+  return await apiCall.put(`/users/update/${id}`, body);
 }
 
 export const useUpdateUser = () => {

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiCall = axios.create({
-  baseURL: "https://digipionerapi.liara.run/v1/api",
+  baseURL: "https://benitech.liara.run/api",
 });
 apiCall.interceptors.request.use(
   function (config) {
@@ -12,7 +12,6 @@ apiCall.interceptors.request.use(
     return config;
   },
   function (error) {
-    console.log("ssss")
     return Promise.reject(error);
   }
 );

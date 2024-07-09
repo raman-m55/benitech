@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/modules/providers";
+import { Toaster } from "react-hot-toast";
 
 const Vazir = Vazirmatn({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="fa">
       <body className={`${Vazir.className} bg-[#FAFAFA]`}>
         <Providers>{children}</Providers>
+        <Toaster position="bottom-center" />
       </body>
     </html>
   );

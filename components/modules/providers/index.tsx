@@ -8,8 +8,8 @@ const queryClient = new QueryClient();
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <NextUIProvider>{children}</NextUIProvider>
-    </QueryClientProvider>
+    <NextUIProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </NextUIProvider>
   );
 }

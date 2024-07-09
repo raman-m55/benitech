@@ -201,10 +201,14 @@ const Navbar = () => {
             />
           </li>
           <li className="flex items-center gap-2 max-md:hidden">
-            <Button className="flex items-center gap-2 text-black  p-2  text-sm " variant="bordered">
-              <TbLogin className="text-2xl" />
-        ورود | ثبت نام
-              
+            <Button
+              as={Link}
+              href="/auth"
+              className=" text-black text-sm "
+              variant="bordered"
+              startContent={<TbLogin className="text-2xl" />}
+            >
+              ورود | ثبت نام
             </Button>
             <div className="border-r-2 border-gray-400 h-[30px]"></div>
             <Button isIconOnly variant="bordered">

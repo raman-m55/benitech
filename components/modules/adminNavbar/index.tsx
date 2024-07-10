@@ -1,22 +1,21 @@
 import { Button } from "@nextui-org/react";
 import { CiBellOn } from "react-icons/ci";
+import {Avatar} from "@nextui-org/react";
 
 function AdminPanelNavbar() {
   return (
     <div
       dir="ltr"
-      className="w-full h-24 bg-white flex flex-row-reverse items-center justify-between"
+      className="w-full p-4 h-24 bg-white flex justify-between items-center "
     >
-      <div className="flex flex-col">
-        <span className="font-bold text-right">داشبورد</span>
-        <span>اطلاعات کلی درباره تغییرات اخیر پنل</span>
-      </div>
-      <div className="flex gap-6 ml-6">
+     
+      <div className="flex justify-between gap-3 items-center">
         <Button isIconOnly variant="bordered" className="text-2xl">
           <CiBellOn />
         </Button>
 
-        <Button variant="bordered">ادمین بنینک</Button>
+        <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+
       </div>
     </div>
   );

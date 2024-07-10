@@ -3,6 +3,7 @@ import "../globals.css";
 
 import { Toaster } from "react-hot-toast";
 import SideBarPanel from "@/components/modules/sidebar";
+import AdminPanelNavbar from "@/components/modules/adminNavbar";
 
 export const metadata: Metadata = {
   title: "پنل ادمین",
@@ -15,14 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <body className="sm:mr-60 bg-[#f9f9f9] min-h-[100vh]">
+      <AdminPanelNavbar/>
       <SideBarPanel />
-      <div className="sm:mr-60 bg-[#f9f9f9] min-h-[100vh]">
         <div className="">
           {children}
         </div>
-      </div>
       <Toaster position="bottom-center" />
-    </>
+      </body>
+
   );
 }

@@ -5,7 +5,6 @@ import React from 'react'
 function DashboardProductsPage() {
   return (
     <>
-      <AdminPanelNavbar/>
       <DashboardProductsTemplate/>
     </>
   )

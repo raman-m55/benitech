@@ -5,7 +5,6 @@ import React from "react";
 function DashboardUsersPage() {
   return (
     <>
-      <AdminPanelNavbar />
       <DashboardUserTemplate />
     </>
   );

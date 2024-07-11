@@ -16,14 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <body className="sm:mr-60 bg-[#f9f9f9] min-h-[100vh]">
+    <div className="sm:mr-60 bg-[#f9f9f9] min-h-[100vh]">
       <AdminPanelNavbar/>
       <SideBarPanel />
         <div className="">
           {children}
         </div>
       <Toaster position="bottom-center" />
-      </body>
+      </div>
 
   );
 }

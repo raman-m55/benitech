@@ -6,8 +6,12 @@ function AdminPanelNavbar() {
   return (
     <div
       dir="ltr"
-      className="w-full p-4 h-24 bg-white flex justify-between items-center "
+      className="w-full p-4 h-24 bg-white flex flex-row-reverse justify-between items-center "
     >
+      <div className="flex flex-col items-end">
+        <p className="font-bold text-xl">پنل ادمین</p>
+        <span className="text-gray-500">آخرین تغییرات در پنل ادمین فروشگاه</span>
+      </div>
       <div className="flex justify-between gap-3 items-center">
         <Button isIconOnly variant="bordered" className="text-2xl">
           <CiBellOn />

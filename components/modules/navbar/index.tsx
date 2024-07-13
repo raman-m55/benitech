@@ -3,17 +3,17 @@ import { motion, useScroll, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { IoSearch } from "react-icons/io5";
-import { Divider, Input } from "@nextui-org/react";
+import {  Input } from "@nextui-org/react";
 import { TbLogin } from "react-icons/tb";
 import { CiShoppingCart } from "react-icons/ci";
 import { CiMenuFries } from "react-icons/ci";
-import { Tooltip, Button } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import { menuItems } from "@/constants";
 import { FaMobileScreen, FaComputer, FaAngleLeft } from "react-icons/fa6";
 import { FaLaptop } from "react-icons/fa";
 import { AiOutlineRollback } from "react-icons/ai";
-import { IoIosCart, IoMdMenu, IoIosArrowDown } from "react-icons/io";
+import {  IoIosArrowDown } from "react-icons/io";
 
 const categories = [
   {

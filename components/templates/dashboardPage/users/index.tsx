@@ -18,7 +18,6 @@ import {
   Tooltip,
   useDisclosure,
 } from "@nextui-org/react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useState } from "react";
 import toast from "react-hot-toast";
@@ -56,7 +55,7 @@ const columns = [
 
 function DashboardUserTemplate() {
   const router = useRouter();
-  const { data, isPending, isSuccess, refetch } = useGetUsers();
+  const { data, isPending, refetch } = useGetUsers();
   const { mutate, isPending: isSubmitting } = useDeleteUser();
   const [myProduct, setMyProduct] = useState({ _id: 0, email: "" });
 

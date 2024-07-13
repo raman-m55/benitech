@@ -37,8 +37,8 @@ function DashboardEditUserTemplate() {
           toast.success(res.data.message);
           router.push("/dashboard/users");
         },
-        onError(error, variables, context) {
-          console.log(error);
+        onError() {
+          toast.error("خطای سرور")
         },
       }
     );

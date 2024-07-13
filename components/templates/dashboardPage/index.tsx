@@ -7,7 +7,7 @@ import ChartSection from "./chartSection";
 
 function DashboardTemplate() {
   return (
-    <div className="p-3">
+    <div className="py-4 px-10">
       <div className="flex flex-col gap-4">
         <span className="font-bold text-xl">داشبورد</span>
         <div className="w-full flex items-center justify-around">

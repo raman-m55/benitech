@@ -42,17 +42,12 @@ function AdminPanelNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState<number | null>(null);
 
-  useEffect(() => {
-    // اینجا می‌توانید داده‌ها را از API بگیرید و مقادیر اولیه را به‌روزرسانی کنید
-    // setUser({ name: "new name", avatar: "new avatar url" });
-  }, []);
-
   const handleSubMenuToggle = (index: number) => {
     setOpenSubMenu(openSubMenu === index ? null : index);
   };
 
   return (
-    <Navbar maxWidth="2xl">
+    <Navbar maxWidth="2xl" className="z-[1000]">
       <NavbarBrand>
         <Link href="/" className="flex items-center gap-[2px]">
           <Image

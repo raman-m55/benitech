@@ -15,10 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="bg-[#f9f9f9] min-h-[100vh] ">
+    <div className="bg-[#F5F6FA]">
       <AdminPanelNavbar/>
       <SideBarPanel />
-        <div className="mr-[185px] max-sm:p-0">
+        <div className="mr-[240px] max-sm:p-0">
           {children}
         </div>
       </div>

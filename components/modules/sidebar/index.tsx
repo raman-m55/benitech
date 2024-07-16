@@ -1,164 +1,99 @@
 'use client';
-import { MenuItemDashboard } from '@/types';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { AiOutlineDashboard } from "react-icons/ai";
+import { CiShoppingCart } from "react-icons/ci";
+import { TbCategoryPlus } from "react-icons/tb";
+import { FaRegUser } from "react-icons/fa";
+import { useState } from 'react';
+import { IoIosArrowDown } from "react-icons/io";
 
-import {
-  FaShoppingCart,
-  FaUsers,
-  FaTag,
-  FaFileAlt,
-  FaFolder,
-  FaChartLine,
-  FaUserShield,
-  FaCog,
-  FaSearch,
-  FaAd,
-  FaEnvelope,
-  FaFileUpload,
-  FaLock,
-} from 'react-icons/fa';
-import { FaHouseChimney } from 'react-icons/fa6';
-
-export const menuItemsDashboard: MenuItemDashboard[] = [
+export const items = [
   {
-    id: 0,
-    name: 'داشبورد',
-    href: '/dashboard',
-    icon: <FaHouseChimney />,
-    subMenu: [
-      { label: 'نمایش کلی', route: '/dashboard/' },
-      { label: 'گزارش‌های فروش', route: 'dashboard/orders/sales-reports' },
-      { label: 'موجودی', route: '/dashboard/products/inventory' },
-      { label: 'بازدیدها', route: '/dashboard/reports/visits' },
-    ],
+    label: 'داشبورد',
+    route: '/dashboard',
+    icon: <AiOutlineDashboard />
   },
   {
-    id: 1,
-    name: ' محصولات',
-    href: '/dashboard/products',
-    icon: <FaShoppingCart />,
-    subMenu: [
-      { label: 'لیست محصولات', route: '/dashboard/products' },
-      { label: 'افزودن محصول', route: '/dashboard/products/create' },
-      { label: 'دسته‌بندی محصولات', route: '/dashboard/products/categories' },
-      { label: 'مدیریت موجودی', route: '/dashboard/products/inventory' },
-    ],
+    label: 'محصولات',
+    route: '/dashboard/products',
+    icon: <CiShoppingCart />
   },
   {
-    id: 2,
-    name: ' سفارشات',
-    href: '/dashboard/orders',
-    icon: <FaFileAlt />,
-    subMenu: [
-      { label: 'لیست سفارشات', route: '/dashboard/orders/' },
-      { label: 'گزارش فروش', route: '/dashboard/orders/sales-reports' },
-    ],
+    label: 'دسته بندی ها',
+    icon: <TbCategoryPlus />,
+    subMeno: [
+      {
+        label: 'محصولات',
+        route: '/dashboard/categories/products'
+      },
+      {
+        label: 'وبلاک',
+        route: '/dashboard/categories/blogs'
+      }
+    ]
   },
   {
-    id: 3,
-    name: ' مشتریان',
-    href: '/dashboard/customers',
-    icon: <FaUsers />,
-    subMenu: [
-      { label: 'لیست مشتریان', route: '/dashboard/customers' },
-      { label: 'مدیریت حساب مشتریان', route: '/dashboard/customers/manage' },
-    ],
-  },
-  {
-    id: 4,
-    name: ' تخفیف‌ها و کوپن‌ها',
-    href: '/dashboard/discounts',
-    icon: <FaTag />,
-    subMenu: [
-      { label: 'لیست تخفیف‌ها و کوپن‌ها', route: '/dashboard/discounts' },
-      { label: 'افزودن تخفیف', route: '/dashboard/discounts/add' },
-    ],
-  },
-  {
-    id: 5,
-    name: ' وبلاگ',
-    href: '/dashboard/blog',
-    icon: <FaFileAlt />,
-    subMenu: [
-      { label: 'لیست پست‌ها', route: '/dashboard/blog' },
-      { label: 'افزودن پست', route: '/dashboard/blog/create' },
-      { label: 'دسته‌بندی پست‌ها', route: '/dashboard/blog/categories' },
-      { label: 'مدیریت نظرات', route: '/dashboard/blog/comments' },
-    ],
-  },
-  {
-    id: 6,
-    name: ' دسته‌بندی‌ها',
-    href: '/dashboard/categories',
-    icon: <FaFolder />,
-    subMenu: [
-      { label: 'دسته‌بندی محصولات', route: '/dashboard/products/categories' },
-      { label: 'دسته‌بندی وبلاگ', route: '/dashboard/blog/categories' },
-    ],
-  },
-  {
-    id: 7,
-    name: 'گزارشات و آنالیزها',
-    href: '/dashboard/reports',
-    icon: <FaChartLine />,
-    subMenu: [
-      { label: 'گزارشات فروش', route: '/dashboard/orders/sales-reports' },
-      { label: 'گزارشات بازدید', route: '/dashboard/reports/visits' },
-      { label: 'گزارشات موجودی', route: '/dashboard/products/inventory' },
-    ],
-  },
-  {
-    id: 8,
-    name: ' کاربران و نقش‌ها',
-    href: '/dashboard/users',
-    icon: <FaUserShield />,
-    subMenu: [{ label: 'ایجاد کاربر', route: '/dashboard/users/create' }],
-  },
-  {
-    id: 14,
-    name: ' فایل‌ها و رسانه‌ها',
-    href: '/dashboard/media',
-    icon: <FaFileUpload />,
-    subMenu: [
-      { label: 'آپلود فایل‌ها', route: '/dashboard/media/upload' },
-      { label: 'مدیریت فایل‌ها', route: '/dashboard/media' },
-    ],
-  },
+    label: 'کاربر ها',
+    route: '/dashboard/users',
+    icon: <FaRegUser />
+  }
 ];
 
 const SideBarPanel = () => {
+  const [openMenus, setOpenMenus] = useState<{ [key: number]: boolean }>({});
   const pathName = usePathname();
-  return (
-    <div className="fixed z-[100] top-0 right-0 pt-[90px] h-full w- flex flex-col items-start justify-start gap-4  bg-white shadow-lg max-sm:hidden  ">
-      {menuItemsDashboard.map((item, index) => (
-        <div
-          key={index}
-          className={`flex items-center justify-start gap-3
-        w-full hover:bg-gray-200 p-2 px-4 group relative 
-        ${pathName === item.href && 'border-r-5 border-blue-700'}`}
-        >
-          <div className={`${pathName === item.href && 'bg-blue-700  w-full px-3 py-2 rounded text-white'} flex items-center gap-3`}>
-            <span className={`${pathName === item.href ? 'text-white':'text-blue-700'}  text-xl`}>{item.icon}</span>
-            <Link href={item.href} className={`text-md max-md:hidden w-full`}>
-              {item.name}
-            </Link>
-          </div>
 
-          <div className="absolute z-[1000] top-0 -left-[182px] transition group-hover:translate-x-3 translate-x-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-500 ease-in-out group-hover:transform w-[170px] transform rounded-md bg-white shadow-md">
-            {item.subMenu?.map((item, index) => (
-              <Link
-                href={item.route}
-                key={index}
-                className={`flex items-center justify-start gap-3 w-full hover:bg-gray-200 p-2 px-3 group relative 
-                ${pathName === item.route && 'border-l-5 border-blue-700'}`}
+  const toggleMenu = (index: number) => {
+    setOpenMenus((prev) => ({ ...prev, [index]: !prev[index] }));
+  };
+
+  return (
+    <div className='fixed top-0 right-0 h-screen w-[240px] flex flex-col
+     items-center justify-start p-5 bg-white shadow-sm max-sm:hidden'>
+      <div className='text-2xl text-black font-bold flex flex-row-reverse
+       items-center justify-center'>
+        <h1 className='text-blue-500'>Beni</h1><span>tech</span>
+      </div>
+      <div className='w-full p-4 flex flex-col justify-start items-center gap-4'>
+        {items.map((item, index) => (
+          item.subMeno ? (
+            <div key={index} className='w-full'>
+              <div
+                onClick={() => toggleMenu(index)}
+                className={`w-full p-3 flex items-center justify-between gap-4 hover:bg-gray-200 rounded-md cursor-pointer ${pathName === item.route && 'bg-blue-500 text-white'}`}
               >
-                <p className="text-md text-sm ">{item.label}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      ))}
+                <div className='flex items-center justify-start gap-2'>
+                  <span className='text-2xl'>{item.icon}</span>
+                  <p className='text-sm'>{item.label}</p>
+                </div>
+                <IoIosArrowDown className={`transition-transform ${openMenus[index] ? 'rotate-180' : ''}`} />
+              </div>
+              <div className={`transition-all duration-300 overflow-hidden ${openMenus[index] ? 'max-h-screen' : 'max-h-0'}`}>
+                {item.subMeno.map((subItem, subIndex) => (
+                  <Link
+                    key={subIndex}
+                    href={subItem.route}
+                    className={`block w-full p-3 pl-6 text-sm text-gray-700
+                    hover:bg-gray-100 ${pathName === subItem.route && 'text-blue-500'}`}
+                  >
+                    <p className='max-md:hidden'>{subItem.label}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <Link
+              key={index}
+              href={item.route}
+              className={`w-full p-3 flex items-center justify-start gap-2 hover:bg-gray-200 rounded-md ${pathName === item.route && 'bg-blue-500 text-white'}`}
+            >
+              <span className='text-2xl'>{item.icon}</span>
+              <p className='text-sm'>{item.label}</p>
+            </Link>
+          )
+        ))}
+      </div>
     </div>
   );
 };

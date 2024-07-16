@@ -1,10 +1,24 @@
-'use client'
+'use client';
 import { MenuItemDashboard } from '@/types';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import {  FaShoppingCart, FaUsers, FaTag, FaFileAlt, FaFolder, FaChartLine, FaUserShield, FaCog, FaSearch, FaAd, FaEnvelope, FaFileUpload, FaLock } from 'react-icons/fa';
-import { FaHouseChimney } from "react-icons/fa6";
+import {
+  FaShoppingCart,
+  FaUsers,
+  FaTag,
+  FaFileAlt,
+  FaFolder,
+  FaChartLine,
+  FaUserShield,
+  FaCog,
+  FaSearch,
+  FaAd,
+  FaEnvelope,
+  FaFileUpload,
+  FaLock,
+} from 'react-icons/fa';
+import { FaHouseChimney } from 'react-icons/fa6';
 
 export const menuItemsDashboard: MenuItemDashboard[] = [
   {
@@ -99,9 +113,7 @@ export const menuItemsDashboard: MenuItemDashboard[] = [
     name: ' کاربران و نقش‌ها',
     href: '/dashboard/users',
     icon: <FaUserShield />,
-    subMenu: [
-      { label: 'ایجاد کاربر', route: '/dashboard/users/create' },
-    ],
+    subMenu: [{ label: 'ایجاد کاربر', route: '/dashboard/users/create' }],
   },
   {
     id: 14,
@@ -113,37 +125,42 @@ export const menuItemsDashboard: MenuItemDashboard[] = [
       { label: 'مدیریت فایل‌ها', route: '/dashboard/media' },
     ],
   },
-
 ];
-
 
 const SideBarPanel = () => {
   const pathName = usePathname();
   return (
-    <div className='fixed z-[100] top-0 right-0 pt-[90px] h-full w- flex flex-col items-start justify-start gap-4  bg-white shadow-lg max-sm:hidden  '>
-      {menuItemsDashboard.map((item , index) => (
-        <div key={index} className={`flex items-center justify-start gap-3
+    <div className="fixed z-[100] top-0 right-0 pt-[90px] h-full w- flex flex-col items-start justify-start gap-4  bg-white shadow-lg max-sm:hidden  ">
+      {menuItemsDashboard.map((item, index) => (
+        <div
+          key={index}
+          className={`flex items-center justify-start gap-3
         w-full hover:bg-gray-200 p-2 px-4 group relative 
-        ${pathName === item.href && 'border-l-5 border-blue-700' }`}>
-          <span className='text-blue-700 text-xl'>
-            {item.icon}
-          </span>
-          <Link href={item.href} className='text-md max-md:hidden w-full'>{item.name}</Link>
-          
-          <div className='absolute z-[1000] top-0 -left-[182px] transition group-hover:translate-x-3 translate-x-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-500 ease-in-out group-hover:transform w-[170px] transform rounded-md bg-white shadow-md'>
-            {item.subMenu?.map((item , index) => (
-              <Link href={item.route} key={index} className={`flex items-center justify-start gap-3 w-full hover:bg-gray-200 p-2 px-3 group relative 
-                ${pathName === item.route && 'border-l-5 border-blue-700' }`}>
-                  
-                  <p  className='text-md text-sm '>{item.label}</p>
-              </Link>
+        ${pathName === item.href && 'border-r-5 border-blue-700'}`}
+        >
+          <div className={`${pathName === item.href && 'bg-blue-700  w-full px-3 py-2 rounded text-white'} flex items-center gap-3`}>
+            <span className={`${pathName === item.href ? 'text-white':'text-blue-700'}  text-xl`}>{item.icon}</span>
+            <Link href={item.href} className={`text-md max-md:hidden w-full`}>
+              {item.name}
+            </Link>
+          </div>
 
+          <div className="absolute z-[1000] top-0 -left-[182px] transition group-hover:translate-x-3 translate-x-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-500 ease-in-out group-hover:transform w-[170px] transform rounded-md bg-white shadow-md">
+            {item.subMenu?.map((item, index) => (
+              <Link
+                href={item.route}
+                key={index}
+                className={`flex items-center justify-start gap-3 w-full hover:bg-gray-200 p-2 px-3 group relative 
+                ${pathName === item.route && 'border-l-5 border-blue-700'}`}
+              >
+                <p className="text-md text-sm ">{item.label}</p>
+              </Link>
             ))}
           </div>
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default SideBarPanel
+export default SideBarPanel;

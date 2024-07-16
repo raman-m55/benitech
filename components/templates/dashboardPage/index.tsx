@@ -1,9 +1,11 @@
-import React from "react";
-import { BiUser } from "react-icons/bi";
-import { FaPoll } from "react-icons/fa";
-import { FaTruckRampBox } from "react-icons/fa6";
-import { TbTimeDurationOff } from "react-icons/tb";
-import ChartSection from "./chartSection";
+import React from 'react';
+import { BiUser } from 'react-icons/bi';
+import { FaPoll } from 'react-icons/fa';
+import { FaTruckRampBox } from 'react-icons/fa6';
+import { TbTimeDurationOff } from 'react-icons/tb';
+import ChartSection from './chartSection';
+import { IoTrendingDownOutline, IoTrendingUpOutline } from 'react-icons/io5';
+import RecentOrdersSection from './RecentOrdersSection';
 
 function DashboardTemplate() {
   return (
@@ -21,7 +23,9 @@ function DashboardTemplate() {
                 <BiUser />
               </div>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 items-center">
+              <IoTrendingUpOutline className="text-green-400 text-xl" />
+
               <span className="text-green-400">47.3%</span>
               <span>رشد نسبت به دیروز</span>
             </div>
@@ -36,7 +40,8 @@ function DashboardTemplate() {
                 <FaPoll />
               </div>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 items-center">
+            <IoTrendingDownOutline className="text-red-400 text-xl"/>
               <span className="text-red-400">47.3%</span>
               <span>کاهش نسبت به دیروز</span>
             </div>
@@ -51,7 +56,8 @@ function DashboardTemplate() {
                 <FaTruckRampBox />
               </div>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 items-center">
+              <IoTrendingUpOutline className="text-green-400 text-xl" />
               <span className="text-green-400">47.3%</span>
               <span>رشد نسبت به دیروز</span>
             </div>
@@ -66,7 +72,8 @@ function DashboardTemplate() {
                 <TbTimeDurationOff />
               </div>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 items-center">
+            <IoTrendingDownOutline className="text-red-400 text-xl"/>
               <span className="text-red-400">47.3%</span>
               <span>کاهش نسبت به دیروز</span>
             </div>
@@ -76,6 +83,12 @@ function DashboardTemplate() {
           <p className="font-bold text-xl text-right">مجموع فروش</p>
           <div className=" w-[80%] mx-auto">
             <ChartSection />
+          </div>
+        </div>
+        <div className=" w-[98%] mx-auto bg-white rounded p-4">
+          <p className="font-bold text-xl text-right">سفارشات اخیر</p>
+          <div className=" w-[80%] mx-auto">
+           <RecentOrdersSection/>
           </div>
         </div>
       </div>

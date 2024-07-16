@@ -5,7 +5,7 @@ import { FaTruckRampBox } from 'react-icons/fa6';
 import { TbTimeDurationOff } from 'react-icons/tb';
 import ChartSection from './chartSection';
 import { IoTrendingDownOutline, IoTrendingUpOutline } from 'react-icons/io5';
-import RecentOrdersSection from './RecentOrdersSection';
+import RecentSection from './recentSection';
 
 function DashboardTemplate() {
   return (
@@ -80,15 +80,15 @@ function DashboardTemplate() {
           </div>
         </div>
         <div className=" w-[98%] mx-auto bg-white rounded p-4">
-          <p className="font-bold text-xl text-right">مجموع فروش</p>
+          <p className="font-bold text-xl text-right mb-4">مجموع فروش</p>
           <div className=" w-[80%] mx-auto">
             <ChartSection />
           </div>
         </div>
         <div className=" w-[98%] mx-auto bg-white rounded p-4">
-          <p className="font-bold text-xl text-right">سفارشات اخیر</p>
-          <div className=" w-[80%] mx-auto">
-           <RecentOrdersSection/>
+          <p className="font-bold text-xl text-right mb-4">سفارشات اخیر</p>
+          <div className="w-full">
+            <RecentSection/>
           </div>
         </div>
       </div>

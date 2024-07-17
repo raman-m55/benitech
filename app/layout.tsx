@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa">
-      <body className={`${Vazir.className} bg-[#FAFAFA]`}>
+      <body className={`${Vazir.className} bg-[#FAFAFA] min-h-screen`}>
         <Providers>{children}</Providers>
         <Toaster position="bottom-center" />
       </body>

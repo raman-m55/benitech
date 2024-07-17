@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="bg-[#F5F6FA]">
+    <div className="">
       <AdminPanelNavbar/>
       <SideBarPanel />
         <div className="mr-[240px] max-sm:p-0">

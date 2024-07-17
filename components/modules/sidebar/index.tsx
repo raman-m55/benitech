@@ -25,11 +25,11 @@ export const items = [
     subMeno: [
       {
         label: 'محصولات',
-        route: '/dashboard/categories/products'
+        route: '/dashboard/products/categories'
       },
       {
         label: 'وبلاک',
-        route: '/dashboard/categories/blogs'
+        route: '/dashboards/blog/categories'
       }
     ]
   },

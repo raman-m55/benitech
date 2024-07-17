@@ -40,7 +40,7 @@ function OtpTemplate() {
   const onSubmit = (values: LoginFormType) => {
     mutate(values, {
       onSuccess: (data: AxiosResponse) => {
-        toast.success(data.data.message);
+        toast.success("ورود موفقیت آمیز بود");
         localStorage.setItem("token", data.data.accessToken);
         if (data.data.user.role === "user") {
           router.push("/panel");
@@ -49,7 +49,7 @@ function OtpTemplate() {
         }
       },
       onError: (error: any) => {
-        toast.error(error.response?.data.message);
+        
       },
     } as any);
   };

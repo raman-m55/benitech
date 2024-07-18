@@ -1,12 +1,15 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import apiCall from "./apiCall";
+import { useMutation, useQuery } from '@tanstack/react-query';
+import apiCall from './apiCall';
 
-export async function getProducts() {
-  return await apiCall.get("/products/get-all");
+export async function getProducts(page = 1) {
+  return await apiCall.get(`/products/get-all?page=${page}`);
 }
 
-export const useGetProducts = () => {
-  return useQuery({ queryKey: ["products"], queryFn: getProducts });
+export const useGetProducts = (page: number) => {
+  return useQuery({
+    queryKey: ['products', page],
+    queryFn: () => getProducts(page),
+  });
 };
 //*********************************************************** */
 async function DeleteProducts({ id }: { id: number }) {
@@ -23,7 +26,7 @@ async function SingleProduct(productsID: any) {
 }
 export const useSingleUser = (productsID: string) => {
   return useQuery({
-    queryKey: ["/product/detail"],
+    queryKey: ['/product/detail'],
     queryFn: () => SingleProduct(productsID),
     refetchOnMount: true,
   });

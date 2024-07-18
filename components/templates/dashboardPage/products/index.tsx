@@ -1,14 +1,18 @@
-"use client";
+'use client';
 
-import { useGetProducts } from "@/api/productsApi";
-import { useDeleteUser, useGetUsers } from "@/api/usersApi";
+import { useDeleteProducts, useGetProducts } from '@/api/productsApi';
+import { dateFilter } from '@/constants';
+import {
+  DeleteIcon,
+  EditIcon,
+  EyeIcon,
+} from '@/constants/icons.nextUi';
 import {
   Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
+  Input,
+  Pagination,
+  Select,
+  SelectItem,
   Spinner,
   Table,
   TableBody,
@@ -18,48 +22,43 @@ import {
   TableRow,
   Tooltip,
   useDisclosure,
-} from "@nextui-org/react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useCallback, useState } from "react";
-import toast from "react-hot-toast";
-import { CiFilter } from "react-icons/ci";
-import { FaPencil } from "react-icons/fa6";
-import { GoTrash } from "react-icons/go";
-import { TfiSearch } from "react-icons/tfi";
+} from '@nextui-org/react';
+import { useRouter } from 'next/navigation';
+import React, { useCallback, useMemo, useState } from 'react';
+import toast from 'react-hot-toast';
+import { FaPencil } from 'react-icons/fa6';
+import { GoTrash } from 'react-icons/go';
+import { IoIosSearch } from 'react-icons/io';
 
 const columns = [
   {
-    key: "title",
-    label: "نام محصول",
+    key: 'title',
+    label: 'نام محصول',
   },
   {
-    key: "price",
-    label: "قیمت",
+    key: 'price',
+    label: 'قیمت',
   },
   {
-    key: "quantity",
-    label: "تعداد موجود",
+    key: 'quantity',
+    label: 'تعداد موجود',
   },
   {
-    key: "sold",
-    label: "تعداد فروش",
+    key: 'sold',
+    label: 'تعداد فروش',
   },
   {
-    key: "edit",
-    label: "ویرایش",
-  },
-  {
-    key: "delete",
-    label: "حذف",
+    key: 'actions',
+    label: '',
   },
 ];
 
 function DashboardProductsPage() {
   const router = useRouter();
-  const { data, isPending, refetch } = useGetProducts();
-  const { mutate, isPending: isSubmitting } = useDeleteUser();
-  const [myProduct, setMyProduct] = useState({ _id: 0, email: "" });
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const { data, isPending,isSuccess, refetch } = useGetProducts(currentPage);
+  const { mutate, isPending: isSubmitting } = useDeleteProducts();
+  const [myProduct, setMyProduct] = useState({ _id: 0, title: '' });
 
   const {
     isOpen: DeleteIsOpen,
@@ -68,8 +67,8 @@ function DashboardProductsPage() {
     onClose: DeleteOnClose,
   } = useDisclosure();
 
-  const onDelete = (id: number, email: string) => {
-    setMyProduct({ _id: id, email: email });
+  const onDelete = (id: number, title: string) => {
+    setMyProduct({ _id: id, title: title });
     DeleteOnOpen();
   };
   const handleDeleteProduct = (id: number) => {
@@ -92,192 +91,162 @@ function DashboardProductsPage() {
     const cellValue: any = product[columnKey];
 
     switch (columnKey) {
-      case "title":
+      case 'title':
+        return <div className="">{product.title}</div>;
+      case 'price':
+        return <div className="">{product.price}</div>;
+      case 'quantity':
         return (
-          <div className="bg-[#F4F4F4] p-4 rounded-lg">{product.title}</div>
-        );
-      case "price":
-        return (
-          <div className="bg-[#F4F4F4] p-4 rounded-lg">{product.price}</div>
-        );
-      case "quantity":
-        return (
-          <div className="bg-[#F4F4F4] p-4 rounded-lg">
-            <p className="text-bold text-sm capitalize text-default-400">
-              {product.quantity}
-            </p>
+          <div className="">
+            <p className="">{product.quantity}</p>
           </div>
         );
-      case "edit":
+      case 'sold':
+        return <div className="">{product.sold}</div>;
+      case 'actions':
         return (
-          <div className="bg-[#F4F4F4] p-4 rounded-lg">
-            <Tooltip content="ویرایش">
-              <span className="text-lg cursor-pointer w-full flex items-center justify-center">
-                <FaPencil
-                  height={20}
-                  width={20}
-                  onClick={() => {
-                    router.push(`/dashboard/products/edit/${product._id}`);
-                  }}
-                />
+          <div className="relative flex items-center justify-end gap-2">
+            <Tooltip content="مشاهده محصول">
+              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                <EyeIcon />
               </span>
             </Tooltip>
-          </div>
-        );
-      case "delete":
-        return (
-          <div className="bg-[#F4F4F4] p-4 rounded-lg ">
+            <Tooltip content="ویرایش محصول">
+              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                <EditIcon />
+              </span>
+            </Tooltip>
             <Tooltip color="danger" content="حذف محصول">
-              <span className="text-lg text-danger w-full flex items-center justify-center cursor-pointer">
-                <GoTrash
-                  height={20}
-                  width={20}
-                  color="red"
-                  onClick={() => {
-                    onDelete(product?._id, product?.email);
-                  }}
-                />
+              <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                <DeleteIcon />
               </span>
             </Tooltip>
           </div>
-        );
-      case "sold":
-        return (
-          <div className="bg-[#F4F4F4] p-4 rounded-lg">{product.sold}</div>
         );
       default:
         return cellValue;
     }
   }, []);
 
-  return (
-    <div className="p-3">
-      <div className="bg-white rounded-md">
-        <div className="bg-white p-4 rounded-lg flex flex-col gap-4">
-          <div className=" w-full flex items-center justify-between">
-            <span className="font-semibold text-2xl">محصولات</span>
-            <div className="flex gap-6">
-              <Button
-                isIconOnly
-                variant="bordered"
-                size="lg"
-                className="border-1"
-              >
-                <CiFilter className="text-2xl" />
-              </Button>
-              <div className="flex min-w-[360px] items-center justify-between bg-white rounded-2xl border p-1 ">
-                <input
-                  type="text"
-                  placeholder="جستجو کنید..."
-                  className="focus:outline-none w-full"
-                />
-                <Button color="primary" variant="flat" isIconOnly>
-                  <TfiSearch className="text-[25px]" color="#0085FF" />
-                </Button>
-              </div>
-            </div>
-            <div>
-              <Button
-                size="lg"
-                color="primary"
-                as={Link}
-                href="/dashboard/products/create"
-              >
-                افزون محصول
-              </Button>
-            </div>
-          </div>
+  const pages = useMemo(() => {
+    return Math.ceil(data?.data.data.length / 10);
+  }, [data]);
 
-          {/** Products table */}
-          <div className="block w-full overflow-x-auto">
-            {isPending ? (
-              <div className="flex items-center justify-center gap-4">
-                <Spinner />
-                <span>درحال دریافت اطلاعات</span>
-              </div>
-            ) : (
-              <Table
-                className="overflow-hidden"
-                classNames={{
-                  th: ["text-right text-white bg-transparent"],
-                  wrapper: ["bg-transparent shadow-none p-0"],
-                  td: ["data-[selected=true]:before:rounded-none"],
-                }}
-                radius="none"
-                dir="rtl"
-                aria-label="collection table"
-              >
-                <TableHeader columns={columns}>
-                  {(column) => (
-                    <TableColumn key={column.key}>
-                      <div className="w-full text-right text-base bg-[#424C54] py-5 px-2 rounded-lg">
-                        {column.label}
-                      </div>
-                    </TableColumn>
-                  )}
-                </TableHeader>
-                <TableBody
-                  className="relative"
-                  items={data?.data.data}
-                  isLoading={isPending}
-                >
-                  {(item: any) => (
-                    <TableRow key={item._id} radioGroup="none">
-                      {(columnKey) => (
-                        <TableCell height={50}>
-                          {renderCell(item, columnKey)}
-                        </TableCell>
-                      )}
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            )}
-          </div>
+  return (
+    <div className="w-full flex flex-col items-center justify-start gap-5 py-4 px-10">
+      <div className="flex w-full justify-between items-center ">
+        <div className="flex flex-col items-start justify-start gap-2">
+          <h3 className="text-2xl font-bold">محصولات</h3>
+          <p className="text-md text-gray-700">
+            لیست تمامی محصولات موجود در وبسایت{' '}
+          </p>
         </div>
       </div>
-      {/* Delete Modal */}
-      <Modal
-        backdrop="blur"
-        isOpen={DeleteIsOpen}
-        onOpenChange={DeleteOnOpenChange}
-      >
-        <ModalContent className="px-5">
-          {(onClose) => (
-            <>
-              <ModalHeader dir="rtl" className="flex flex-col gap-1">
-                حذف کاربر
-              </ModalHeader>
-              <ModalBody dir="rtl">
-                <p>آیا از حذف این محصول اطمینان دارید؟</p>
-                <p>{myProduct.email}</p>
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  isLoading={isSubmitting ? true : false}
-                  disabled={isSubmitting ? true : false}
-                  color="danger"
-                  variant="bordered"
-                  onPress={() => {
-                    handleDeleteProduct(myProduct._id);
-                  }}
-                >
-                  حذف
-                </Button>
-                <Button
-                  disabled={isSubmitting ? true : false}
-                  color="primary"
-                  variant="bordered"
-                  className="px-10"
-                  onPress={onClose}
-                >
-                  صرف نظر
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+
+      <div className="flex items-center justify-between w-full">
+        <div className="w-[200px]">
+          <Select
+            label="مرتب سازی"
+            items={dateFilter}
+            className="shadow-sm"
+            dir="ltr"
+          >
+            {(item) => (
+              <SelectItem key={item.key} value={item.key}>
+                {item.label}
+              </SelectItem>
+            )}
+          </Select>
+        </div>
+        <div className="w-[300px] max-md:w-[250px] ">
+          <Input
+            label="جستجو"
+            isClearable
+            radius="lg"
+            placeholder="جتسجو کنید..."
+            startContent={
+              <IoIosSearch className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
+            }
+          />
+        </div>
+        <div>
+          <Button color="primary" size="lg">
+            افزودن محصول
+          </Button>
+        </div>
+      </div>
+
+      {isPending ? (
+        <Spinner />
+      ) : (
+        isSuccess ? 
+        <>
+          <div className="w-full">
+            <Table>
+              <TableHeader columns={columns}>
+                {(column) => (
+                  <TableColumn
+                    key={column.key}
+                    className="text-right"
+                    align={'end'}
+                  >
+                    {column.label}
+                  </TableColumn>
+                )}
+              </TableHeader>
+              <TableBody items={data?.data.data}>
+                {(item: any) => (
+                  <TableRow key={item?._id}>
+                    {(columnKey) => (
+                      <TableCell>
+                        {renderCell(item, columnKey)}
+                      </TableCell>
+                    )}
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+
+          <div className="flex flex-col items-end gap-5 w-full">
+            <p className="text-small text-default-500">
+              Selected Page: {currentPage}
+            </p>
+            <Pagination
+              total={pages}
+              color="primary"
+              page={currentPage}
+              onChange={setCurrentPage}
+            />
+            <div className="flex gap-2">
+              <Button
+                size="sm"
+                variant="flat"
+                color="default"
+                onPress={() =>
+                  setCurrentPage((prev) =>
+                    prev > 1 ? prev - 1 : prev
+                  )
+                }
+              >
+                قبلی
+              </Button>
+              <Button
+                size="sm"
+                variant="flat"
+                color="default"
+                onPress={() =>
+                  setCurrentPage((prev) =>
+                    prev < pages ? prev + 1 : prev
+                  )
+                }
+              >
+                بعدی
+              </Button>
+            </div>
+          </div>
+        </> : <div>خطا در دریافت اطلاعات</div>
+      )}
     </div>
   );
 }

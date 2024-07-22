@@ -3,9 +3,10 @@ import React from "react";
 
 function Dashboard() {
   return (
-    <>
-      <DashboardTemplate/>
-    </>
+    <div className="w-full h-screen flex items-center justify-center">
+      {/* <DashboardTemplate/> */}
+      test
+    </div>
   );
 }
 

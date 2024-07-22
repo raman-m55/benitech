@@ -1,12 +1,18 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import apiCall from "./apiCall";
+import {
+  useMutation,
+  useQuery,
+} from '@tanstack/react-query';
+import apiCall from './apiCall';
 
 export async function getUsers() {
-  return await apiCall.get("/users/get-all");
+  return await apiCall.get('/users/get-all');
 }
 
 export const useGetUsers = () => {
-  return useQuery({ queryKey: ["users"], queryFn: getUsers });
+  return useQuery({
+    queryKey: ['users'],
+    queryFn: getUsers,
+  });
 };
 //*********************************************************** */
 async function DeleteUser({ id }: { id: number }) {
@@ -23,7 +29,7 @@ async function SingleUser(userID: any) {
 }
 export const useSingleUser = (userID: string) => {
   return useQuery({
-    queryKey: ["/users/detail"],
+    queryKey: ['/users/detail'],
     queryFn: () => SingleUser(userID),
     refetchOnMount: true,
   });

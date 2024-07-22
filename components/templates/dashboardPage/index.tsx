@@ -7,7 +7,7 @@ import ChartSection from './chartSection';
 import { IoTrendingDownOutline, IoTrendingUpOutline } from 'react-icons/io5';
 import RecentSection from './recentSection';
 
-function DashboardTemplate() {
+function  DashboardTemplate() {
   return (
     <div className="py-4 px-10">
       <div className="flex flex-col gap-4">

@@ -19,10 +19,15 @@ export const dateFilter: DateFilter[] = [
   },
 ];
 
-export const columns = [
+export const columnsUser = [
   { name: 'نام', uid: 'name' },
   { name: 'ایمیل', uid: 'role' },
   { name: 'وضعیت حساب', uid: 'status' },
+  { name: 'بیشتر', uid: 'actions' },
+];
+export const columnsCategories = [
+  { name: 'نام', uid: 'name' },
+  { name: 'نام سازنده', uid: 'addedBy' },
   { name: 'بیشتر', uid: 'actions' },
 ];
 
@@ -34,7 +39,8 @@ export const users = [
     team: 'Management',
     status: 'active',
     age: '29',
-    avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026024d',
+    avatar:
+      'https://i.pravatar.cc/150?u=a042581f4e29026024d',
     email: 'tony.reichert@example.com',
   },
   {
@@ -44,7 +50,8 @@ export const users = [
     team: 'Development',
     status: 'paused',
     age: '25',
-    avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
+    avatar:
+      'https://i.pravatar.cc/150?u=a042581f4e29026704d',
     email: 'zoey.lang@example.com',
   },
   {
@@ -54,7 +61,8 @@ export const users = [
     team: 'Development',
     status: 'active',
     age: '22',
-    avatar: 'https://i.pravatar.cc/150?u=a04258114e29026702d',
+    avatar:
+      'https://i.pravatar.cc/150?u=a04258114e29026702d',
     email: 'jane.fisher@example.com',
   },
   {
@@ -64,7 +72,8 @@ export const users = [
     team: 'Marketing',
     status: 'vacation',
     age: '28',
-    avatar: 'https://i.pravatar.cc/150?u=a048581f4e29026701d',
+    avatar:
+      'https://i.pravatar.cc/150?u=a048581f4e29026701d',
     email: 'william.howard@example.com',
   },
   {
@@ -74,7 +83,59 @@ export const users = [
     team: 'Sales',
     status: 'active',
     age: '24',
-    avatar: 'https://i.pravatar.cc/150?u=a092581d4ef9026700d',
+    avatar:
+      'https://i.pravatar.cc/150?u=a092581d4ef9026700d',
     email: 'kristen.cooper@example.com',
+  },
+];
+
+export const productsCategories = [
+  {
+    name: 'دسته بندی 1',
+    addeBy: 'raman',
+    id: 1,
+  },
+  {
+    name: 'دسته بندی 1',
+    addeBy: 'raman',
+    id: 2,
+  },
+];
+
+export const paginationTabel = [
+  {
+    label: 'جدید',
+    key: 1,
+  },
+  {
+    label: 'قدیمی',
+    key: 2,
+  },
+];
+
+const columnsUserTabel = [
+  {
+    key: 'first_name',
+    label: 'نام',
+  },
+  {
+    key: 'last_name',
+    label: 'نام خانوادگی',
+  },
+  {
+    key: 'email',
+    label: 'ایمیل',
+  },
+  {
+    key: 'role',
+    label: 'نقش',
+  },
+  {
+    key: 'edit',
+    label: 'ویرایش',
+  },
+  {
+    key: 'delete',
+    label: 'حذف',
   },
 ];

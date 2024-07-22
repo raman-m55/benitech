@@ -16,9 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <div className="bg-[#F5F6FA]">
-      <AdminPanelNavbar/>
+      <AdminPanelNavbar/> 
       <SideBarPanel />
-        <div className="mr-[240px] max-sm:p-0">
+        <div className="md:mr-[240px] max-sm:p-0 h-screen">
           {children}
         </div>
       </div>

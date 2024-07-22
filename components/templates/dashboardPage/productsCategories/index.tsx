@@ -8,43 +8,31 @@ TableBody,
 TableRow,
 TableCell,
 Select,
-User,
-Chip,
 Tooltip,
 ChipProps,
 SelectItem,
 Pagination,
 Button} from "@nextui-org/react";
-import { columnsUser, paginationTabel, users } from '@/constants';
+import { columnsCategories, paginationTabel, productsCategories } from '@/constants';
 import { DeleteIcon, EditIcon, EyeIcon } from '@/constants/icons.nextUi';
 
-const statusColorMap: Record<string, ChipProps["color"]>  = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
-};
-type User = typeof users[0];
 
-const UsersTabel = () => {
+type Categories = typeof productsCategories[0];
+
+const ProductsCategoriesTabel = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const renderCell = useCallback((user: User, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof User];
+  const renderCell = useCallback((category: Categories, columnKey: React.Key) => {
+    const cellValue = category[columnKey as keyof Categories];
 
     switch (columnKey) {
       case "name":
         return (
-          <p className="text-bold text-sm capitalize">{user.name}</p>
+          <p className="text-bold text-sm capitalize">{category.name}</p>
         );
-      case "role":
+      case "addedBy":
         return (
-            <p className="text-bold text-sm capitalize">{cellValue}</p>
-        );
-      case "status":
-        return (
-          <Chip className="capitalize" color={statusColorMap[user.status]} size="sm" variant="flat">
-            {cellValue}
-          </Chip>
+          <p className="text-bold text-sm capitalize">{category.addeBy}</p>
         );
       case "actions":
         return (
@@ -54,12 +42,12 @@ const UsersTabel = () => {
                 <EyeIcon />
               </span>
             </Tooltip>
-            <Tooltip content="ویرایش کاربر">
+            <Tooltip content="ویرایش دسته بندی">
               <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
                 <EditIcon />
               </span>
             </Tooltip>
-            <Tooltip color="danger" content="حذف کاربر">
+            <Tooltip color="danger" content="حذف دسته بندی">
               <span className="text-lg text-danger cursor-pointer active:opacity-50">
                 <DeleteIcon />
               </span>
@@ -71,40 +59,38 @@ const UsersTabel = () => {
     }
   }, []);
   return (
-    <div className='p-4 w-full h-full flex flex-col items-center justify-start
+<div className='p-4 w-full h-full flex flex-col items-center justify-start
     gap-5   '>
       <div className='w-full flex items-center justify-start '>
-        <h3 className='text-2xl font-bold'>لیست کاربران سایت</h3>
+        <h3 className='text-2xl font-bold'>لیست دسته بندی محصولات</h3>
       </div>
-      <div className='w-full ltl flex items-center justify-end gap-4'
+      <div className='w-full ltl flex flex-row-reverse  items-center justify-between'
       dir="ltr">
         <Select
           color='primary'
           items={paginationTabel}
-          label="زمان ثبت نام"
+          label="زمان ساخت"
           className="max-w-[190px]"
         >
           {(item) => <SelectItem key={item.key}>{item.label}</SelectItem>}
         </Select>
-        <Select
-          color='primary'
-          items={paginationTabel}
-          label="وضعیت حساب"
-          className="w-[190px]"
+
+        <Button
+        color="primary"
         >
-          {(item) => <SelectItem key={item.key}>{item.label}</SelectItem>}
-        </Select>
+          افزودن دسته بندی جدید
+        </Button>
       </div>
 
       <Table aria-label="users tabel">
-      <TableHeader columns={columnsUser}>
+      <TableHeader columns={columnsCategories}>
         {(column) => (
           <TableColumn key={column.uid} align={column.uid === "actions" ? "end" : "start"}>
             {column.name}
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody items={users}>
+      <TableBody items={productsCategories}>
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
@@ -145,4 +131,4 @@ const UsersTabel = () => {
   )
 }
 
-export default UsersTabel;
+export default ProductsCategoriesTabel

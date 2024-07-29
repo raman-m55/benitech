@@ -42,9 +42,9 @@ function OtpTemplate() {
       onSuccess: (data: AxiosResponse) => {
         toast.success("ورود موفقیت آمیز بود");
         localStorage.setItem("token", data.data.accessToken);
-        if (data.data.user.role === "user") {
+        if (data.data.data === "user") {
           router.push("/panel");
-        } else if (data.data.user.role === "admin") {
+        } else if (data.data.data === "admin") {
           router.push("/dashboard");
         }
       },

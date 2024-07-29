@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import apiCall from './apiCall';
 
 export async function getProducts(page = 1) {
-  return await apiCall.get(`/products/get-all?page=${page}`);
+  return await apiCall.get(`/products/get-all?page=${page}&limit=10`);
 }
 
 export const useGetProducts = (page: number) => {
